@@ -1,0 +1,32 @@
+{% extends 'front/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<h1>{{ product.name }} <a href="#" class="btn btn-success">Comprar</a></h1>
+<div class="">
+  <h3>Resumo</h3>
+  <p>Seguradora: Travel Ace </p>
+  <p>Destino: Brasil</p>
+  <p>Início: 18/10/2017</p>
+  <p>Término: 24/10/2017</p>
+  <p>Valor: R$ {{ quotation.adult.price|floatformat:2 }} </p>
+</div>
+
+<div class="">
+  <h3>Benefícios</h3>
+  <table class="table">
+    <thead>
+      <tr></tr>
+      <tr></tr>
+    </thead>
+    {% for benefit in product.benefits %}
+    <tbody>
+      <tr>
+        <td>{{ benefit.name }}</td>
+        <td>{{ benefit.coverage }}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

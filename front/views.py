@@ -87,3 +87,39 @@ class QuotationView(View):
             ))
 
         return render(request, self.template_name, {'form': form})
+
+
+class CoverageView(View):
+    template_name = 'front/coverage.html'
+
+    def get(self, request, *args, **kwargs):
+        begin_date = datetime.strptime(
+            kwargs.get('begin_date'), '%Y-%m-%d')
+        end_date = datetime.strptime(
+            kwargs.get('end_date'), '%Y-%m-%d')
+        destination = kwargs.get('slug')
+        product_id = kwargs.get('product_id')
+
+        quotations = Quotation()
+        products = Products()
+
+        quotations = quotations.calculate(
+            destination=destination,
+            begin_date=begin_date,
+            end_date=end_date
+        )
+        quotation = [q for q in quotations if q['code'] == str(product_id)][0]
+        quotation = json.dumps(quotation)
+        quotation = json2obj(quotation)
+        product = products.list(product_id)
+        product = json.dumps(product)
+        product = json2obj(product)
+
+        return render(request, self.template_name, {
+            'product': product,
+            'quotation': quotation
+        })
+
+
+class PurchaseView(View):
+    pass

@@ -16,6 +16,7 @@
         <th>DESPESA MÉDICA HOSPITALAR TOTAL</th>
         <th>SEGURO BAGAGEM</th>
         <th>TOTAL POR SEGURADO</th>
+        <th></th>
       </tr>
     </thead>
     {% for quotation in quotations %}
@@ -26,6 +27,7 @@
             <td>{{ quotation.hospital_care }}</td>
             <td>{{ quotation.luggage_insurance }}</td>
             <td>R$ {{ quotation.adult.price|floatformat:2 }}</td>
+            <td><a href="{% url 'front:coverage' quotation.code request.resolver_match.kwargs.slug request.resolver_match.kwargs.begin_date request.resolver_match.kwargs.end_date %}" class="btn btn-success">Selecionar</a></td>
         </tr>
       </tbody>
     {% endfor %}
