@@ -57,21 +57,12 @@ class Quotation(Api):
 class Purchase(Api):
     """ Object from purchase """
 
-    def pay(self,  **kwargs):
+    def buy(self,  **kwargs):
         url = "{}/purchases-redirect".format(self.base_url)
         body = {
             "product_code": kwargs.get('product_code'),
             "destination": kwargs.get('destination'),
             "coverage_begin": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
-            "coverage_end": "{:%Y-%m-%d}".format(kwargs.get('end_date')),
-            "holder": {
-                "full_name": kwargs.get('holder_name'),
-                "cpf": kwargs.get('holder_cpf')
-            },
-            "insureds": {
-                "cpf": kwargs.get('insured_cpf'),
-                "full_name": kwargs.get('insured_name'),
-                "birth_date": "{:%Y-%m-%d}".format(kwargs.get('insured_birth'))
-            }
+            "coverage_end": "{:%Y-%m-%d}".format(kwargs.get('end_date'))
         }
         return super(Purchase, self).post(url, body)

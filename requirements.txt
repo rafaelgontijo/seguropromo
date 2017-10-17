@@ -3,6 +3,7 @@ chardet==3.0.4
 Django==1.11.6
 django-bootstrap3==9.0.0
 django-environ==0.4.4
+django-localflavor==1.5.2
 django-redis==4.8.0
 idna==2.6
 mccabe==0.6.1

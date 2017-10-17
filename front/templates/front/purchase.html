@@ -1,0 +1,11 @@
+{% extends 'front/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Finalizar a compra{% endblock %}
+{% block content %}
+<h1>Finalizar a compra</h1>
+<form role="form" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    {% buttons submit='Comprar' layout='inline' %}{% endbuttons %}
+</form>
+{% endblock %}

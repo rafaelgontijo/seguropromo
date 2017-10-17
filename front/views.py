@@ -2,12 +2,14 @@ import json
 from datetime import datetime
 
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 
 from api.models import Products, Quotation
-from front.forms import FormQuotation
+from front.models import Purchase
+from front.forms import FormQuotation, FormPurchase
 from front.utils import json2obj
 
 
@@ -122,4 +124,68 @@ class CoverageView(View):
 
 
 class PurchaseView(View):
-    pass
+    form_class = FormPurchase
+    template_name = 'front/purchase.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            begin_date = datetime.strptime(
+                kwargs.get('begin_date'), '%Y-%m-%d')
+            end_date = datetime.strptime(
+                kwargs.get('end_date'), '%Y-%m-%d')
+            destination = kwargs.get('slug')
+            product_id = kwargs.get('product_id')
+            insured_cpf = form.cleaned_data.get('insured_cpf')
+            insured_name = form.cleaned_data.get('insured_name')
+            insured_birth = form.cleaned_data.get('birth_date')
+            card_name = form.cleaned_data.get('card_name')
+            card_cpf = form.cleaned_data.get('card_cpf')
+            card_number = form.cleaned_data.get('card_number')
+            card_mouth = form.cleaned_data.get('card_mouth')
+            card_year = form.cleaned_data.get('card_year')
+            card_cvv = form.cleaned_data.get('card_cvv')
+            buy_name = form.cleaned_data.get('buy_name')
+            buy_email = form.cleaned_data.get('buy_email')
+            buy_phone = form.cleaned_data.get('buy_phone')
+
+            Purchase.objects.create(
+                begin_date=begin_date,
+                end_date=end_date,
+                destination=destination,
+                product_id=product_id,
+                insured_cpf=insured_cpf,
+                insured_name=insured_name,
+                insured_birth=insured_birth,
+                card_name=card_name,
+                card_cpf=card_cpf,
+                card_number=card_number,
+                card_mouth=card_mouth,
+                card_year=card_year,
+                card_cvv=card_cvv,
+                buy_name=buy_name,
+                buy_email=buy_email,
+                buy_phone=buy_phone
+            )
+            messages.add_message(request, messages.SUCCESS,
+                                 'Compra realizada com sucesso.')
+
+            # Coment because this endpoint redirect to production server
+            #
+            # purchase = Purchase()
+            # buy = purchase.buy(
+            #     insured_cpf=insured_cpf,
+            #     insured_name=insured_name,
+            #     insured_birth=insured_birth,
+            #     begin_date=begin_date,
+            #     end_date=end_date,
+            #     destination=destination,
+            #     product_code=product_id,
+            # )
+
+            return HttpResponseRedirect(reverse('front:home'))
+        return render(request, self.template_name, {'form': form})
