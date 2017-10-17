@@ -29,7 +29,7 @@ class PaymentMethod(Api):
     """ Object from payment method """
 
     def list(self):
-        url = "{}/paymentmethods".format(self.base_url)
+        url = "{}/paymentmethod".format(self.base_url)
         return super(PaymentMethod, self).get(url)
 
 
