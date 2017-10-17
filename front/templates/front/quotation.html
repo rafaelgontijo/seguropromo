@@ -1,0 +1,33 @@
+{% extends 'front/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Cotação{% endblock %}
+{% block content %}
+<h1>Encontre as melhores ofertas de Seguro Viagem da internet</h1>
+<form role="form" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    {% buttons submit='Compare' layout='inline' %}{% endbuttons %}
+</form>
+<table class="table">
+    <thead>
+      <tr>
+        <th>SEGURADORA</th>
+        <th>PLANO</th>
+        <th>DESPESA MÉDICA HOSPITALAR TOTAL</th>
+        <th>SEGURO BAGAGEM</th>
+        <th>TOTAL POR SEGURADO</th>
+      </tr>
+    </thead>
+    {% for quotation in quotations %}
+      <tbody>
+        <tr>
+            <td>{{ quotation.provider_name }}</td>
+            <td>{{ quotation.name }}</td>
+            <td>{{ quotation.hospital_care }}</td>
+            <td>{{ quotation.luggage_insurance }}</td>
+            <td>R$ {{ quotation.adult.price|floatformat:2 }}</td>
+        </tr>
+      </tbody>
+    {% endfor %}
+</table>
+{% endblock %}
