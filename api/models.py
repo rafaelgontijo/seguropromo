@@ -47,11 +47,9 @@ class Quotation(Api):
     def calculate(self, **kwargs):
         url = "{}/quotations".format(self.base_url)
         body = {
-          "product_code": kwargs.get('product_code'),
           "begin_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
           "end_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
           "destination": kwargs.get('destination'),
-          "benefits": kwargs.get('benefits')
         }
         return super(Quotation, self).post(url, body)
 
