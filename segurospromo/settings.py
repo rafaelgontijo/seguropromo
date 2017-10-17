@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'compra',
-    'cotacao'
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -123,3 +122,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Api settings
+SEGUROSPROMO_USER = env('SEGUROSPROMO_USER')
+SEGUROSPROMO_PASS = env('SEGUROSPROMO_PASS')
+SEGUROSPROMO_URL = env('SEGUROSPROMO_URL')
