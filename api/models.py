@@ -47,30 +47,31 @@ class Quotation(Api):
     def calculate(self, **kwargs):
         url = "{}/quotations".format(self.base_url)
         body = {
-          "begin_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
-          "end_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
-          "destination": kwargs.get('destination'),
+            "begin_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
+            "end_date": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
+            "destination": kwargs.get('destination'),
         }
         return super(Quotation, self).post(url, body)
 
 
 class Purchase(Api):
     """ Object from purchase """
+
     def pay(self,  **kwargs):
         url = "{}/purchases-redirect".format(self.base_url)
         body = {
-          "product_code": kwargs.get('product_code'),
-          "destination": kwargs.get('destination'),
-          "coverage_begin": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
-          "coverage_end": "{:%Y-%m-%d}".format(kwargs.get('end_date')),
-          "holder": {
-            "full_name": kwargs.get('holder_name'),
-            "cpf": kwargs.get('holder_cpf')
-          },
-          "insureds": {
-            "cpf": kwargs.get('insured_cpf'),
-            "full_name": kwargs.get('insured_name'),
-            "birth_date": "{:%Y-%m-%d}".format(kwargs.get('insured_birth'))
-          }
+            "product_code": kwargs.get('product_code'),
+            "destination": kwargs.get('destination'),
+            "coverage_begin": "{:%Y-%m-%d}".format(kwargs.get('begin_date')),
+            "coverage_end": "{:%Y-%m-%d}".format(kwargs.get('end_date')),
+            "holder": {
+                "full_name": kwargs.get('holder_name'),
+                "cpf": kwargs.get('holder_cpf')
+            },
+            "insureds": {
+                "cpf": kwargs.get('insured_cpf'),
+                "full_name": kwargs.get('insured_name'),
+                "birth_date": "{:%Y-%m-%d}".format(kwargs.get('insured_birth'))
+            }
         }
         return super(Purchase, self).post(url, body)
