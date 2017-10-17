@@ -24,3 +24,6 @@ class Purchase(models.Model):
     buy_name = models.CharField(max_length=100)
     buy_email = models.CharField(max_length=100)
     buy_phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.insured_name
