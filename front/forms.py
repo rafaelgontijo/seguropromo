@@ -2,10 +2,6 @@ from django import forms
 from api.models import Destinations
 
 
-class DateInput(forms.widgets.DateInput):
-    input_type = 'date'
-
-
 class FormQuotation(forms.Form):
     def __init__(self, *args, **kwargs):
         super(FormQuotation, self).__init__(*args, **kwargs)
@@ -15,6 +11,8 @@ class FormQuotation(forms.Form):
 
     destiny = forms.ChoiceField(label="Destino")
     begin_date = forms.DateField(
-        label="Partida", widget=DateInput(attrs={'class': 'date'}))
+        label="Partida", widget=forms.widgets.DateInput(
+            attrs={'class': 'date'}))
     end_date = forms.DateField(
-        label="Retorno", widget=DateInput(attrs={'class': 'date'}))
+        label="Retorno", widget=forms.widgets.DateInput(
+            attrs={'class': 'date'}))
