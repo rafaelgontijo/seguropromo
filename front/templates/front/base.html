@@ -1,0 +1,44 @@
+{% extends 'bootstrap3/bootstrap3.html' %}
+
+{% block bootstrap3_title %}Seguros Promo{% endblock %}
+
+{% block bootstrap3_extra_head %}
+<style>
+  body {
+    padding-top: 50px;
+  }
+</style>
+{% endblock %}
+
+{% load bootstrap3 %}
+
+{% block bootstrap3_content %}
+    {% block nav %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'front:home' %}">Seguros Promo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#atendimento">Atendimento</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#afiliados">Afiliados</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% endblock %}
+    <div class="container">
+        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

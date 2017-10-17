@@ -1,0 +1,11 @@
+{% extends 'front/base.html' %}
+{% load bootstrap3 %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<h1>Encontre as melhores ofertas de Seguro Viagem da internet<h1>
+<form role="form" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form layout='inline' %}
+    {% buttons submit='Compare' layout='inline' %}{% endbuttons %}
+</form>
+{% endblock %}
