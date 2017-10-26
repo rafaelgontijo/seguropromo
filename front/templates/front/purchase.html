@@ -6,13 +6,34 @@
     {% csrf_token %}
     {% for field in form %}
         <div class="form-group">
-         {{ field.errors }}
          {{ field.label_tag }} {{ field }}
-         {% if field.help_text %}
-         <p class="help">{{ field.help_text|safe }}</p>
-         {% endif %}
+         <ul>
+         {% for error in field.errors %}
+           <li><small class="form-text text-muted">{{ error|safe }}</small></li>
+         {% endfor %}
+         </ul>
      </div>
     {% endfor %}
     <div class="form-group"><button class="btn btn-primary" type="submit">Comprar</button></div>
 </form>
+{% endblock %}
+{% block script %}
+  <script src="//oss.maxcdn.com/jquery.mask/1.11.4/jquery.mask.min.js"></script>
+  <script>
+      $(function() {
+          $(".date").datepicker({
+            language: 'pt-BR',
+            autoclose: true
+          });
+          var SPMaskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+          },
+          spOptions = {
+            onKeyPress: function(val, e, field, options) {
+                field.mask(SPMaskBehavior.apply({}, arguments), options);
+              }
+          };
+          $("#id_buy_phone").mask(SPMaskBehavior, spOptions);
+      });
+  </script>
 {% endblock %}
