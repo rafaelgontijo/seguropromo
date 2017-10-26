@@ -1,5 +1,4 @@
 {% extends 'front/base.html' %}
-{% load bootstrap3 %}
 {% block title %}Início{% endblock %}
 {% block content %}
 <h1>{{ product.name }} <a href="{% url 'front:order' request.resolver_match.kwargs.product_id request.resolver_match.kwargs.slug request.resolver_match.kwargs.begin_date request.resolver_match.kwargs.end_date %}" class="btn btn-success">Comprar</a></h1>

@@ -1,11 +1,18 @@
 {% extends 'front/base.html' %}
-{% load bootstrap3 %}
 {% block title %}Finalizar a compra{% endblock %}
 {% block content %}
 <h1>Finalizar a compra</h1>
 <form role="form" method="post">
     {% csrf_token %}
-    {% bootstrap_form form layout='inline' %}
-    {% buttons submit='Comprar' layout='inline' %}{% endbuttons %}
+    {% for field in form %}
+        <div class="form-group">
+         {{ field.errors }}
+         {{ field.label_tag }} {{ field }}
+         {% if field.help_text %}
+         <p class="help">{{ field.help_text|safe }}</p>
+         {% endif %}
+     </div>
+    {% endfor %}
+    <div class="form-group"><button class="btn btn-primary" type="submit">Comprar</button></div>
 </form>
 {% endblock %}

@@ -3,7 +3,18 @@ from api.models import Destinations
 from localflavor.br.forms import BRCPFField, BRPhoneNumberField
 
 
-class FormQuotation(forms.Form):
+class CommonForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(CommonForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            if field.widget.attrs.get('class'):
+                field.widget.attrs['class'] = 'form-control ' + \
+                    field.widget.attrs['class']
+            else:
+                field.widget.attrs['class'] = 'form-control'
+
+
+class FormQuotation(CommonForm):
     def __init__(self, *args, **kwargs):
         super(FormQuotation, self).__init__(*args, **kwargs)
         destinations = Destinations()
@@ -19,7 +30,7 @@ class FormQuotation(forms.Form):
             attrs={'class': 'date'}))
 
 
-class FormPurchase(forms.Form):
+class FormPurchase(CommonForm):
     insured_cpf = BRCPFField(label="CPF")
     insured_name = forms.CharField(max_length=100, label="Nome")
     birth_date = forms.DateField(

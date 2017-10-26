@@ -1,55 +1,138 @@
-{% extends 'bootstrap3/bootstrap3.html' %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Seguros Promo{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" integrity="sha256-I4gvabvvRivuPAYFqevVhZl88+vNf2NksupoBxMQi04=" crossorigin="anonymous" />
+    <style>
+      /* Space out content a bit */
+      body {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
 
-{% block bootstrap3_title %}Seguros Promo{% endblock %}
+      /* Everything but the jumbotron gets side spacing for mobile first views */
+      .header,
+      .marketing,
+      .footer {
+        padding-right: 1rem;
+        padding-left: 1rem;
+      }
 
-{% block bootstrap3_extra_head %}
-<style>
-  body {
-    padding-top: 50px;
-  }
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha256-rByPlHULObEjJ6XQxW/flG2r+22R5dKiAoef+aXWfik=" crossorigin="anonymous" />
-{% endblock %}
+      /* Custom page header */
+      .header {
+        padding-bottom: 1rem;
+        border-bottom: .05rem solid #e5e5e5;
+      }
 
-{% block bootstrap3_extra_script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.9.2/i18n/jquery.ui.datepicker-pt-BR.min.js" integrity="sha256-N6gvRsEwHgJ4G2ViHlDc5c1dOaZyeNRPxyv1nKiUqf0=" crossorigin="anonymous"></script>
-<script>
-    $(function() {
-        $( ".date" ).datepicker();
-    });
-</script>
-{% endblock %}
+      /* Make the masthead heading the same height as the navigation */
+      .header h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 3rem;
+      }
 
-{% load bootstrap3 %}
+      /* Custom page footer */
+      .footer {
+        padding-top: 1.5rem;
+        color: #777;
+        border-top: .05rem solid #e5e5e5;
+      }
 
-{% block bootstrap3_content %}
-    {% block nav %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'front:home' %}">Seguros Promo</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#atendimento">Atendimento</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#afiliados">Afiliados</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+      /* Customize container */
+      @media (min-width: 48em) {
+        .container {
+          max-width: 46rem;
+        }
+      }
+      .container-narrow > hr {
+        margin: 2rem 0;
+      }
 
-    {% endblock %}
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        text-align: center;
+        border-bottom: .05rem solid #e5e5e5;
+      }
+      .jumbotron .btn {
+        padding: .75rem 1.5rem;
+        font-size: 1.5rem;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 3rem 0;
+      }
+      .marketing p + h4 {
+        margin-top: 1.5rem;
+      }
+
+      /* Responsive: Portrait tablets and up */
+      @media screen and (min-width: 48em) {
+        /* Remove the padding we set earlier */
+        .header,
+        .marketing,
+        .footer {
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        /* Space out the masthead */
+        .header {
+          margin-bottom: 2rem;
+        }
+
+        /* Remove the bottom border on the jumbotron for visual effect */
+        .jumbotron {
+          border-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="container">
-        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+      <header class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#atendimento">Atendimento</a></li>
+            <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="#afiliados">Afiliados</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Seguros Promo</h3>
+      </header>
+      <main role="main">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {% endfor %}
+        {% endif %}
         {% block content %}{% endblock %}
-    </div>
-{% endblock %}
+      </main>
+      <footer class="footer">
+        <p>&copy; Seguros Promo 2017</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js" integrity="sha256-TueWqYu0G+lYIimeIcMI8x1m14QH/DQVt4s9m/uuhPw=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha256-QN6KDU+9DIJ/9M0ynQQfw/O90ef0UXucGgKn0LbUtq4=" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+            $(".date").datepicker({
+              language: 'pt-BR'
+            });
+        });
+    </script>
+  </body>
+</html>
