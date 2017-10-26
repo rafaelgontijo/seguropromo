@@ -4,10 +4,10 @@
 <h1>{{ product.name }} <a href="{% url 'front:order' request.resolver_match.kwargs.product_id request.resolver_match.kwargs.slug request.resolver_match.kwargs.begin_date request.resolver_match.kwargs.end_date %}" class="btn btn-success">Comprar</a></h1>
 <div class="">
   <h3>Resumo</h3>
-  <p>Seguradora: Travel Ace </p>
-  <p>Destino: Brasil</p>
-  <p>Início: 18/10/2017</p>
-  <p>Término: 24/10/2017</p>
+  <p>Seguradora: {{ product.provider_name }} </p>
+  <p>Destino: {{ destination   }}</p>
+  <p>Início: {{ begin_date|date }}</p>
+  <p>Término: {{ end_date|date }}</p>
   <p>Valor: R$ {{ quotation.adult.price|floatformat:2 }} </p>
 </div>
 

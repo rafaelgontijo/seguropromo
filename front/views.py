@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 
-from api.models import Products, Quotation
+from api.models import Destinations, Products, Quotation
 from purchase.models import Purchase
 from front.forms import FormQuotation, FormPurchase
 from front.utils import json2obj
@@ -117,9 +117,19 @@ class CoverageView(View):
         product = json.dumps(product)
         product = json2obj(product)
 
+        destinations = Destinations()
+
+        destinations = destinations.list()
+
+        destination = [e.get('name')
+                       for e in destinations if e.get('slug') == destination][0]
+
         return render(request, self.template_name, {
             'product': product,
-            'quotation': quotation
+            'quotation': quotation,
+            'destination': destination,
+            'begin_date': begin_date,
+            'end_date': end_date
         })
 
 
@@ -158,9 +168,9 @@ class PurchaseView(View):
 
             quotations = Quotation()
             quotations = quotations.calculate(
-               destination=kwargs.get('slug'),
-               begin_date=begin_date,
-               end_date=end_date
+                destination=kwargs.get('slug'),
+                begin_date=begin_date,
+                end_date=end_date
             )
             quotation = [e for e in quotations if e['code'] == product_id][0]
 
