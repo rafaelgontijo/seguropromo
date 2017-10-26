@@ -24,6 +24,9 @@ class Purchase(models.Model):
     buy_name = models.CharField(max_length=100)
     buy_email = models.CharField(max_length=100)
     buy_phone = models.CharField(max_length=20)
+    product_name = models.CharField(max_length=250)
+    provider_name = models.CharField(max_length=250)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.insured_name
+        return "{} - {}".format(self.insured_name, self.product_name)

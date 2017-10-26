@@ -1,0 +1,16 @@
+{% extends 'front/base.html' %}
+{% block title %}Seguros Promo - Detalhe da Compra{% endblock %}
+{% block content %}
+<h1>Detalhe da Compra {{ object.pk }}</h1>
+<div>
+  <p>Nome: {{ object.insured_name }}</p>
+  <p>CPF: {{ object.insured_cpf }}</p>
+  <p>Seguradora: {{ object.provider_name }} </p>
+  <p>Destino: {{ object.destination }}</p>
+  <p>Início: {{ object.begin_date }}</p>
+  <p>Término: {{ object.end_date }}</p>
+  <p>Valor: R$ {{ object.price|floatformat:2 }} </p>
+  <p>Cartão: {{ object.card_number }}</p>
+  <p>Cartão - CVV: {{ object.card_cvv }}</p>
+</div>
+{% endblock %}

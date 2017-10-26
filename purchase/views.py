@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from purchase.models import Purchase
 
-# Create your views here.
+
+class ListPurchase(ListView):
+    model = Purchase
+
+
+class DetailPurchase(DetailView):
+    model = Purchase

@@ -153,6 +153,17 @@ class PurchaseView(View):
             buy_email = form.cleaned_data.get('buy_email')
             buy_phone = form.cleaned_data.get('buy_phone')
 
+            products = Products()
+            product = products.list(product_id)
+
+            quotations = Quotation()
+            quotations = quotations.calculate(
+               destination=kwargs.get('slug'),
+               begin_date=begin_date,
+               end_date=end_date
+            )
+            quotation = [e for e in quotations if e['code'] == product_id][0]
+
             Purchase.objects.create(
                 begin_date=begin_date,
                 end_date=end_date,
@@ -169,7 +180,10 @@ class PurchaseView(View):
                 card_cvv=card_cvv,
                 buy_name=buy_name,
                 buy_email=buy_email,
-                buy_phone=buy_phone
+                buy_phone=buy_phone,
+                product_name=product.get('name'),
+                provider_name=product.get('provider_name'),
+                price=quotation.get('adult').get('price')
             )
             return HttpResponseRedirect(reverse('front:success'))
         return render(request, self.template_name, {'form': form})

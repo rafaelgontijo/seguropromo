@@ -1,0 +1,27 @@
+{% extends 'front/base.html' %}
+{% block title %}Seguros Promo - Compras{% endblock %}
+{% block content %}
+<h1>Compras realizadas</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Início</th>
+        <th>Fim</th>
+        <th></th>
+      </tr>
+    </thead>
+    {% for purchase in object_list %}
+      <tbody>
+        <tr>
+            <td>{{ purchase.insured_name }}</td>
+            <td>{{ purchase.insured_cpf }}</td>
+            <td>{{ purchase.begin_date }}</td>
+            <td>{{ purchase.end_date }}</td>
+            <td><a href="{% url 'purchase:detail' purchase.pk %}" class="btn btn-success">Detalhe</a></td>
+        </tr>
+      </tbody>
+    {% endfor %}
+</table>
+{% endblock %}
