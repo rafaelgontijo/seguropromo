@@ -171,21 +171,5 @@ class PurchaseView(View):
                 buy_email=buy_email,
                 buy_phone=buy_phone
             )
-            messages.add_message(request, messages.SUCCESS,
-                                 'Compra realizada com sucesso.')
-
-            # Coment because this endpoint redirect to production server
-            #
-            # purchase = Purchase()
-            # buy = purchase.buy(
-            #     insured_cpf=insured_cpf,
-            #     insured_name=insured_name,
-            #     insured_birth=insured_birth,
-            #     begin_date=begin_date,
-            #     end_date=end_date,
-            #     destination=destination,
-            #     product_code=product_id,
-            # )
-
-            return HttpResponseRedirect(reverse('front:home'))
+            return HttpResponseRedirect(reverse('front:success'))
         return render(request, self.template_name, {'form': form})
