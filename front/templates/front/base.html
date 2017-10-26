@@ -13,40 +13,38 @@
       </style>
   </head>
   <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-          <a class="navbar-brand" href="{% url 'front:home' %}">Seguros Promo</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="{% url 'front:home' %}">Seguros Promo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="menu de navegação">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-              <li class="nav-item"><a class="nav-link" href="#atendimento">Atendimento</a></li>
-              <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
-              <li class="nav-item"><a class="nav-link" href="#afiliados">Afiliados</a></li>
-            </ul>
+      <div class="collapse navbar-collapse" id="navbars">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="#atendimento">Atendimento</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="#afiliados">Afiliados</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      {% if messages %}
+          {% for message in messages %}
+          <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </nav>
-
-      <main role="main" class="container">
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
-              {{ message }}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% block content %}{% endblock %}
-      </main>
+          {% endfor %}
+      {% endif %}
+      {% block content %}{% endblock %}
       <footer class="footer">
         <p>&copy; Seguros Promo 2017</p>
       </footer>
-    </div> <!-- /container -->
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
