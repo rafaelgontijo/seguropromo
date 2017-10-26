@@ -1,7 +1,7 @@
 {% extends 'front/base.html' %}
 {% block title %}Cotação{% endblock %}
 {% block content %}
-<h1>Encontre as melhores ofertas de Seguro Viagem da internet</h1>
+<h3>Encontre as melhores ofertas de Seguro Viagem da internet</h1>
 <form role="form" method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -20,7 +20,7 @@
       <tr>
         <th>SEGURADORA</th>
         <th>PLANO</th>
-        <th>DESPESA MÉDICA HOSPITALAR TOTAL</th>
+        <th>DESPESA MÉDICA</th>
         <th>SEGURO BAGAGEM</th>
         <th>TOTAL POR SEGURADO</th>
         <th></th>
