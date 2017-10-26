@@ -53,7 +53,7 @@ class FormPurchase(CommonForm):
         ('10', '10'),
         ('11', '11'),
         ('12', '12'),
-    ), label="Mês validade")
+    ), label="Validade mês")
     card_year = forms.ChoiceField(choices=(
         ('', '----'),
         ('2017', '2017'),
@@ -72,7 +72,7 @@ class FormPurchase(CommonForm):
         ('2030', '2030'),
         ('2031', '2031'),
 
-    ), label="Ano validade")
+    ), label="Validade ano")
     card_cvv = forms.CharField(max_length=4, label="CVV")
     buy_name = forms.CharField(max_length=100, label="Nome para contato")
     buy_email = forms.EmailField(label="Email para contato")
