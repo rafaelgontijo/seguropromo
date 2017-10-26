@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.views import View
 
 from api.models import Products, Quotation
-from front.models import Purchase
+from purchase.models import Purchase
 from front.forms import FormQuotation, FormPurchase
 from front.utils import json2obj
 
